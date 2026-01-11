@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Aastha ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:Poppins,sans-serif;
+  background:#000;
+  overflow:hidden;
+  color:#fff;
+}
+
+/* BACKGROUND */
+.slideshow{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
+.slideshow img{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:opacity 2s ease, transform 6s ease;
+}
+.slideshow img.active{
+  opacity:1;
+  transform:scale(1.05);
+}
+
+/* INTRO */
+.center{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  background:rgba(0,0,0,.35);
+}
+.center h1{font-size:36px;margin-bottom:10px}
+.center p{font-size:18px;margin-bottom:25px}
+
+/* BUTTON */
+.btn{
+  background:#ff69b4;
+  padding:14px 28px;
+  border-radius:30px;
+  cursor:pointer;
+  font-size:16px;
+  color:#fff;
+  box-shadow:0 10px 25px rgba(0,0,0,.4);
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:100;
+}
+.box{
+  background:#fff;
+  color:#000;
+  width:90%;
+  max-width:420px;
+  border-radius:22px;
+  padding:20px;
+  text-align:center;
+  animation:pop .4s ease;
+}
+@keyframes pop{
+  from{transform:scale(.85);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+/* STORY IMAGE */
+.story-img{
+  width:100%;
+  max-height:60vh;
+  object-fit:cover;
+  border-radius:18px;
+  animation:storyZoom 6s ease;
+}
+@keyframes storyZoom{
+  from{transform:scale(1);opacity:0}
+  to{transform:scale(1.07);opacity:1}
+}
+
+#storyText{
+  margin-top:10px;
+  font-size:16px;
+  line-height:1.6;
+}
+
+/* PROPOSAL */
+.proposal img{width:140px}
+.buttons{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin-top:15px;
+}
+.buttons div{
+  padding:10px 20px;
+  border-radius:20px;
+  cursor:pointer;
+}
+.yes{background:#ff69b4;color:#fff}
+.no{background:#ddd}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 MUSIC -->
+<audio id="music" loop>
+  <source src="tum-ho-toh.mp3" type="audio/mpeg">
+</audio>
+
+<!-- BACKGROUND -->
+<div class="slideshow">
+  <img src="photos/background/bg1.jpg" class="active">
+  <img src="photos/background/bg2.jpg">
+  <img src="photos/background/bg3.jpg">
+  <img src="photos/background/bg4.jpg">
+  <img src="photos/background/bg5.jpg">
+</div>
+
+<!-- INTRO -->
+<div class="center">
+  <h1>Happy Birthday Aastha 🎂❤️</h1>
+  <p>From someone who loves you endlessly…</p>
+  <div class="btn" onclick="start()">💌 Tap to Begin</div>
+</div>
+
+<!-- LETTER (UNCHANGED MESSAGE) -->
+<div class="modal" id="letter">
+  <div class="box">
+    <p style="line-height:1.6;font-size:15px;">
+      Dear Aastha ❤️<br><br>
+
+      Happy Birthday to the most special person in my life!❤🥰<br><br>
+
+      On your special day, I just want you to know how much you mean to me😚<br><br>
+
+      You bring light, laughter, and so much love wherever you go. May your day be filled with all the happiness you deserve, and may this year bring you endless success, peace. and joy🫶🏻🥹<br><br>
+
+      Always stay the amazing person you the world is are better with you in it.
+      Love you always😘💖
+      <br><br>
+
+      Forever yours,<br>
+      Prajval 💖
+    </p>
+    <div class="btn" onclick="openProposal()">Next 💫</div>
+  </div>
+</div>
+
+<!-- PROPOSAL -->
+<div class="modal" id="proposal">
+  <div class="box proposal">
+    <img src="cartoons/proposal.png">
+    <img src="cartoons/happy-couple.png">
+    <p><b>Will you marry me, Aastha? 💍</b></p>
+    <img src="cartoons/diamond.png" style="width:60px;margin:10px 0">
+    <div class="buttons">
+      <div class="yes" onclick="yes()">YES 💖</div>
+      <div class="no" onclick="no()">Let me think 😳</div>
+    </div>
+  </div>
+</div>
+
+<!-- STORY (ALAG-ALAG MESSAGES) -->
+<div class="modal" id="story">
+  <div class="box">
+    <img id="storyImg" class="story-img">
+    <p id="storyText"></p>
+    <div class="btn" onclick="nextStory()">Next 💕</div>
+  </div>
+</div>
+
+<script>
+/* MUSIC */
+const music=document.getElementById("music");
+document.addEventListener("click",()=>music.play(),{once:true});
+
+/* SLIDESHOW */
+let slides=document.querySelectorAll(".slideshow img");
+let i=0;
+setInterval(()=>{
+  slides[i].classList.remove("active");
+  i=(i+1)%slides.length;
+  slides[i].classList.add("active");
+},4000);
+
+/* FLOW */
+function start(){
+  letter.style.display="flex";
+}
+function openProposal(){
+  letter.style.display="none";
+  proposal.style.display="flex";
+}
+function yes(){
+  alert("I knew it ❤️ Forever begins now!");
+  openStory();
+}
+function no(){
+  alert("Take your time… I’ll wait forever 🥹");
+}
+
+/* STORY DATA (FIXED) */
+const storyImgs=[
+ "photos/story/story1.jpg",
+ "photos/story/story2.jpg",
+ "photos/story/story3.jpg",
+ "photos/story/story4.jpg"
+];
+
+const storyTexts=[
+ "The day we met 💫",
+ "When I fell for you ❤️",
+ "Our silly moments 😄",
+ "Today & forever 💍"
+];
+
+let s=0;
+
+function openStory(){
+  proposal.style.display="none";
+  story.style.display="flex";
+  s=0;
+  showStory();
+}
+function nextStory(){
+  s++;
+  if(s>=storyImgs.length){
+    alert("I love you always ❤️ – Prajval");
+    story.style.display="none";
+    return;
+  }
+  showStory();
+}
+function showStory(){
+  document.getElementById("storyImg").src=storyImgs[s];
+  document.getElementById("storyText").innerText=storyTexts[s];
+}
+</script>
+
+</body>
+</html>
