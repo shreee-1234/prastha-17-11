@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday Aastha ❤️</title>
+<title>Happy Birthday Aastha ❤</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -130,7 +130,7 @@ body{
   <source src="tum-ho -toh.mp3" type="audio/mpeg">
 </audio>
 
-<!-- 🖼️ BACKGROUND -->
+<!-- 🖼 BACKGROUND -->
 <div class="slideshow">
   <img src="bg1.jpg" class="active">
   <img src="bg2.jpg">
@@ -141,27 +141,22 @@ body{
 
 <!-- INTRO -->
 <div class="center">
-  <h1>Happy Birthday Aastha 🎂❤️</h1>
+  <h1>Happy Birthday Aastha 🎂❤</h1>
   <p>From someone who loves you endlessly…</p>
   <div class="btn" onclick="start()">💌 Tap to Begin</div>
 </div>
 
-<!-- LETTER (SAME MESSAGE) -->
+<!-- LETTER -->
 <div class="modal" id="letter">
   <div class="box">
     <p style="line-height:1.6;font-size:15px;">
-      Dear Aastha ❤️<br><br>
-
+      Dear Aastha ❤<br><br>
       Happy Birthday to the most special person in my life!❤🥰<br><br>
-
       On your special day, I just want you to know how much you mean to me😚<br><br>
-
       You bring light, laughter, and so much love wherever you go. May your day be filled with all the happiness you deserve, and may this year bring you endless success, peace. and joy🫶🏻🥹<br><br>
-
       Always stay the amazing person you the world is are better with you in it.
       Love you always😘💖
       <br><br>
-
       Forever yours,<br>
       Prajval 💖
     </p>
@@ -193,7 +188,6 @@ body{
 </div>
 
 <script>
-/* MUSIC FADE-IN */
 const music=document.getElementById("music");
 music.volume=0;
 document.addEventListener("click",()=>{
@@ -209,7 +203,6 @@ document.addEventListener("click",()=>{
   },200);
 },{once:true});
 
-/* SLIDESHOW */
 let slides=document.querySelectorAll(".slideshow img");
 let i=0;
 setInterval(()=>{
@@ -218,33 +211,20 @@ setInterval(()=>{
   slides[i].classList.add("active");
 },4000);
 
-/* FLOW */
 function start(){letter.style.display="flex";}
 function openProposal(){
   letter.style.display="none";
   proposal.style.display="flex";
 }
 function yes(){
-  alert("I knew it ❤️ Forever begins now!");
-  openStory();
+  openStory();   /* alert removed */
 }
 function no(){
-  alert("Take your time… I’ll wait forever 🥹");
+  /* alert removed */
 }
 
-/* STORY DATA */
-const storyImgs=[
- "story1.jpg",
- "story2.jpg",
- "story3.jpg",
- "story4.jpg"
-];
-const storyTexts=[
- "The day we met 💫",
- "When I fell for you ❤️",
- "Our silly moments 😄",
- "Today & forever 💍"
-];
+const storyImgs=["story1.jpg","story2.jpg","story3.jpg","story4.jpg"];
+const storyTexts=["The day we met 💫","When I fell for you ❤","Our silly moments 😄","Today & forever 💍"];
 let s=0;
 
 function openStory(){
@@ -256,8 +236,7 @@ function openStory(){
 function nextStory(){
   s++;
   if(s>=storyImgs.length){
-    alert("I love you always ❤️ – Prajval");
-    story.style.display="none";
+    story.style.display="none";   /* final popup removed */
     return;
   }
   showStory();
@@ -270,4 +249,3 @@ function showStory(){
 
 </body>
 </html>
-
