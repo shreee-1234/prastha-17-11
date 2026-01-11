@@ -14,7 +14,7 @@ body{
   color:#fff;
 }
 
-/* BACKGROUND */
+/* BACKGROUND SLIDESHOW */
 .slideshow{
   position:fixed;
   inset:0;
@@ -33,7 +33,7 @@ body{
   transform:scale(1.05);
 }
 
-/* INTRO */
+/* CENTER INTRO */
 .center{
   position:absolute;
   inset:0;
@@ -58,7 +58,7 @@ body{
   box-shadow:0 10px 25px rgba(0,0,0,.4);
 }
 
-/* MODAL */
+/* MODALS */
 .modal{
   position:fixed;
   inset:0;
@@ -82,24 +82,10 @@ body{
   from{transform:scale(.85);opacity:0}
   to{transform:scale(1);opacity:1}
 }
-
-/* STORY IMAGE */
-.story-img{
+.box img{
   width:100%;
-  max-height:60vh;
-  object-fit:cover;
   border-radius:18px;
-  animation:storyZoom 6s ease;
-}
-@keyframes storyZoom{
-  from{transform:scale(1);opacity:0}
-  to{transform:scale(1.07);opacity:1}
-}
-
-#storyText{
-  margin-top:10px;
-  font-size:16px;
-  line-height:1.6;
+  margin-bottom:10px;
 }
 
 /* PROPOSAL */
@@ -117,6 +103,23 @@ body{
 }
 .yes{background:#ff69b4;color:#fff}
 .no{background:#ddd}
+
+/* STORY IMAGE */
+.story-img{
+  width:100%;
+  max-height:60vh;
+  object-fit:cover;
+  border-radius:18px;
+  animation:storyZoom 6s ease;
+}
+@keyframes storyZoom{
+  from{transform:scale(1);opacity:0}
+  to{transform:scale(1.07);opacity:1}
+}
+#storyText{
+  margin-top:10px;
+  font-size:16px;
+}
 </style>
 </head>
 
@@ -124,16 +127,16 @@ body{
 
 <!-- 🎵 MUSIC -->
 <audio id="music" loop>
-  <source src="tum-ho-toh.mp3" type="audio/mpeg">
+  <source src="tum-ho -toh.mp3" type="audio/mpeg">
 </audio>
 
-<!-- BACKGROUND -->
+<!-- 🖼️ BACKGROUND -->
 <div class="slideshow">
-  <img src="photos/background/bg1.jpg" class="active">
-  <img src="photos/background/bg2.jpg">
-  <img src="photos/background/bg3.jpg">
-  <img src="photos/background/bg4.jpg">
-  <img src="photos/background/bg5.jpg">
+  <img src="bg1.jpg" class="active">
+  <img src="bg2.jpg">
+  <img src="bg3.jpg">
+  <img src="bg4.jpg">
+  <img src="bg5.jpg">
 </div>
 
 <!-- INTRO -->
@@ -143,7 +146,7 @@ body{
   <div class="btn" onclick="start()">💌 Tap to Begin</div>
 </div>
 
-<!-- LETTER (UNCHANGED MESSAGE) -->
+<!-- LETTER (SAME MESSAGE) -->
 <div class="modal" id="letter">
   <div class="box">
     <p style="line-height:1.6;font-size:15px;">
@@ -169,10 +172,10 @@ body{
 <!-- PROPOSAL -->
 <div class="modal" id="proposal">
   <div class="box proposal">
-    <img src="cartoons/proposal.png">
-    <img src="cartoons/happy-couple.png">
+    <img src="proposal.png">
+    <img src="happy-couple.png">
     <p><b>Will you marry me, Aastha? 💍</b></p>
-    <img src="cartoons/diamond.png" style="width:60px;margin:10px 0">
+    <img src="diamond.png" style="width:60px;margin:10px 0">
     <div class="buttons">
       <div class="yes" onclick="yes()">YES 💖</div>
       <div class="no" onclick="no()">Let me think 😳</div>
@@ -180,7 +183,7 @@ body{
   </div>
 </div>
 
-<!-- STORY (ALAG-ALAG MESSAGES) -->
+<!-- STORY -->
 <div class="modal" id="story">
   <div class="box">
     <img id="storyImg" class="story-img">
@@ -190,9 +193,21 @@ body{
 </div>
 
 <script>
-/* MUSIC */
+/* MUSIC FADE-IN */
 const music=document.getElementById("music");
-document.addEventListener("click",()=>music.play(),{once:true});
+music.volume=0;
+document.addEventListener("click",()=>{
+  music.play();
+  let v=0;
+  const fade=setInterval(()=>{
+    if(v<0.4){
+      v+=0.02;
+      music.volume=v;
+    }else{
+      clearInterval(fade);
+    }
+  },200);
+},{once:true});
 
 /* SLIDESHOW */
 let slides=document.querySelectorAll(".slideshow img");
@@ -204,9 +219,7 @@ setInterval(()=>{
 },4000);
 
 /* FLOW */
-function start(){
-  letter.style.display="flex";
-}
+function start(){letter.style.display="flex";}
 function openProposal(){
   letter.style.display="none";
   proposal.style.display="flex";
@@ -219,21 +232,19 @@ function no(){
   alert("Take your time… I’ll wait forever 🥹");
 }
 
-/* STORY DATA (FIXED) */
+/* STORY DATA */
 const storyImgs=[
- "photos/story/story1.jpg",
- "photos/story/story2.jpg",
- "photos/story/story3.jpg",
- "photos/story/story4.jpg"
+ "story1.jpg",
+ "story2.jpg",
+ "story3.jpg",
+ "story4.jpg"
 ];
-
 const storyTexts=[
  "The day we met 💫",
  "When I fell for you ❤️",
  "Our silly moments 😄",
  "Today & forever 💍"
 ];
-
 let s=0;
 
 function openStory(){
@@ -252,10 +263,11 @@ function nextStory(){
   showStory();
 }
 function showStory(){
-  document.getElementById("storyImg").src=storyImgs[s];
-  document.getElementById("storyText").innerText=storyTexts[s];
+  storyImg.src=storyImgs[s];
+  storyText.innerText=storyTexts[s];
 }
 </script>
 
 </body>
 </html>
+
